@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syz.dao.DelegationMapper" >
+  <resultMap id="BaseResultMap" type="com.syz.model.Delegation" >
+    <id column="delegation_id" property="delegationId" jdbcType="INTEGER" />
+    <result column="delegation_user_id" property="delegationUserId" jdbcType="INTEGER" />
+    <result column="startDate" property="startdate" jdbcType="DATE" />
+    <result column="endDate" property="enddate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    delegation_id, delegation_user_id, startDate, endDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from delegation
+    where delegation_id = #{delegationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from delegation
+    where delegation_id = #{delegationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.syz.model.Delegation" >
+    insert into delegation (delegation_id, delegation_user_id, startDate, 
+      endDate)
+    values (#{delegationId,jdbcType=INTEGER}, #{delegationUserId,jdbcType=INTEGER}, #{startdate,jdbcType=DATE}, 
+      #{enddate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.syz.model.Delegation" >
+    insert into delegation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="delegationId != null" >
+        delegation_id,
+      </if>
+      <if test="delegationUserId != null" >
+        delegation_user_id,
+      </if>
+      <if test="startdate != null" >
+        startDate,
+      </if>
+      <if test="enddate != null" >
+        endDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="delegationId != null" >
+        #{delegationId,jdbcType=INTEGER},
+      </if>
+      <if test="delegationUserId != null" >
+        #{delegationUserId,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.syz.model.Delegation" >
+    update delegation
+    <set >
+      <if test="delegationUserId != null" >
+        delegation_user_id = #{delegationUserId,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null" >
+        startDate = #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null" >
+        endDate = #{enddate,jdbcType=DATE},
+      </if>
+    </set>
+    where delegation_id = #{delegationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.syz.model.Delegation" >
+    update delegation
+    set delegation_user_id = #{delegationUserId,jdbcType=INTEGER},
+      startDate = #{startdate,jdbcType=DATE},
+      endDate = #{enddate,jdbcType=DATE}
+    where delegation_id = #{delegationId,jdbcType=INTEGER}
+  </update>
+</mapper>

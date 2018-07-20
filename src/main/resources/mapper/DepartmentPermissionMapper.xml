@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syz.dao.DepartmentPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.syz.model.DepartmentPermission" >
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="permission_id" property="permissionId" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.syz.model.DepartmentPermission" >
+    insert into department_permission (department_id, permission_id)
+    values (#{departmentId,jdbcType=INTEGER}, #{permissionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.syz.model.DepartmentPermission" >
+    insert into department_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="permissionId != null" >
+        permission_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionId != null" >
+        #{permissionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

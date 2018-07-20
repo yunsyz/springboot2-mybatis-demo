@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.syz.dao.UserDelegationMapper" >
+  <resultMap id="BaseResultMap" type="com.syz.model.UserDelegation" >
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="delegation_id" property="delegationId" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.syz.model.UserDelegation" >
+    insert into user_delegation (user_id, delegation_id)
+    values (#{userId,jdbcType=INTEGER}, #{delegationId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.syz.model.UserDelegation" >
+    insert into user_delegation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="delegationId != null" >
+        delegation_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="delegationId != null" >
+        #{delegationId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
